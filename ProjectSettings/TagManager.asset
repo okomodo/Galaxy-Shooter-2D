@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PistolRound
   - Cover
+  - Enemy Target
   layers:
   - Default
   - TransparentFX

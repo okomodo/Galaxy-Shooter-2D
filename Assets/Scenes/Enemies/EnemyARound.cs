@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPistolRound : MonoBehaviour
+public class EnemyARound : MonoBehaviour
 {
     Rigidbody _rigid;
     [SerializeField] private int _speed = 50;
@@ -14,6 +14,11 @@ public class EnemyPistolRound : MonoBehaviour
         _playerPos = GameObject.FindGameObjectWithTag("Enemy Target").transform.position;
         _rigid = GetComponent<Rigidbody>();
         StartCoroutine(DestroyTimer());
+    }
+
+    private void Update()
+    {
+        transform.LookAt(_playerPos);
     }
 
     // Update is called once per frame

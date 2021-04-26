@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Vector3 _direction;
     [SerializeField] private float _pistolFR = 0.5f;
     private float _canFire = 0;
+    [SerializeField] private int _lives = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,11 @@ public class Player : MonoBehaviour
         {
             _canFire = Time.time + _pistolFR;
             _pistol.Fire();
+        }
+
+        if(_lives < 1)
+        {
+            Destroy(gameObject);
         }
     }
     // Update is called once per frame
@@ -45,6 +51,14 @@ public class Player : MonoBehaviour
         else if (transform.position.x < -9)
         {
             transform.position = new Vector3(-9, transform.position.y, 0);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyPistolRound")
+        {
+            _lives--;
         }
     }
 

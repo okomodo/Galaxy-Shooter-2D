@@ -7,6 +7,8 @@ TagManager:
   - PistolRound
   - Cover
   - Enemy Target
+  - EnemyPistolRound
+  - WinBox
   layers:
   - Default
   - TransparentFX

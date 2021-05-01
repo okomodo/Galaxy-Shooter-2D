@@ -9,6 +9,7 @@ TagManager:
   - Enemy Target
   - EnemyPistolRound
   - WinBox
+  - Shotgun Powerup
   layers:
   - Default
   - TransparentFX

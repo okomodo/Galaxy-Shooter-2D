@@ -10,6 +10,7 @@ TagManager:
   - EnemyPistolRound
   - WinBox
   - Shotgun Powerup
+  - Speed Powerup
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private int _speedFloat;
 
     [Header("Movement")]
-    [SerializeField] private int _speed = 10;
+    [SerializeField] private float _speed = 10;
     private Rigidbody _rigid;
     private Vector3 _direction;
     private bool _canMove = false;
@@ -30,6 +30,12 @@ public class Player : MonoBehaviour
     private int _shotgunAmmo = 0;
     private Shotgun _shotgunScript;
 
+    [Header("Speed Powerup")]
+    [SerializeField] private int _speedPUCD = 10;
+    [SerializeField] private float _speedMult = 1.3f;
+    [SerializeField] private float _pistolFRMult = 1.3f;
+    [SerializeField] private float _shotgunFRMult = 1.3f;
+    private bool _speedBoostActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -67,38 +73,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(_lives < 1)
-        {
-            Debug.Log("You Lose!");
-            Destroy(gameObject);
-        }
-    }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (_canMove == true)
-        {
-            _rigid.MovePosition(_rigid.position + _direction * _speed * Time.fixedDeltaTime);
-        }
-    }
-
-    private void CanMoveandShoot()
-    {
-        _canMove = true;
-        _canShoot = true;
-    }
-    private void DrawPistol()
-    {
-            _pistol.SetActive(!_pistol.activeInHierarchy);
-            _pistolDummy.SetActive(!_pistolDummy.activeInHierarchy);
-
-    }
-
-    private void DrawShotgun()
-    {
-        DrawPistol();
-        _shotgun.SetActive(!_shotgun.activeInHierarchy);
-        _shotgunActive = !_shotgunActive;
     }
 
     private void Movement()
@@ -116,23 +90,84 @@ public class Player : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (_canMove == true)
+        {
+            _rigid.MovePosition(_rigid.position + _direction * _speed * Time.fixedDeltaTime);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "EnemyPistolRound")
         {
-            _lives--;
+            LoseLife();
         }
 
-        if(other.tag == "Shotgun Powerup")
+        if (other.tag == "Shotgun Powerup")
         {
             Destroy(other.gameObject);
             _shotgunAmmo = 6;
             if (_shotgunActive == false)
-            { 
+            {
                 DrawShotgun();
             }
-            
+
         }
+
+        if (other.tag == "Speed Powerup")
+        {
+            Destroy(other.gameObject);
+            if (_speedBoostActive == false)
+            {
+                StartCoroutine(SpeedBoost());
+            }
+        }
+
+    }
+
+    void LoseLife()
+    {
+        _lives--;
+
+        if (_lives < 1)
+        {
+            Debug.Log("GAME OVER!");
+        }
+    }
+
+    private void DrawPistol()
+    {
+        _pistol.SetActive(!_pistol.activeInHierarchy);
+        _pistolDummy.SetActive(!_pistolDummy.activeInHierarchy);
+
+    }
+
+    private void CanMoveandShoot()
+    {
+        _canMove = true;
+        _canShoot = true;
+    }
+   
+    private void DrawShotgun()
+    {
+        DrawPistol();
+        _shotgun.SetActive(!_shotgun.activeInHierarchy);
+        _shotgunActive = !_shotgunActive;
+    }
+
+    IEnumerator SpeedBoost()
+    {
+        _speedBoostActive = true;
+        _speed *= _speedMult;
+        _pistolFR /= _pistolFRMult;
+        _shotgunFR /= _shotgunFRMult;
+        yield return new WaitForSeconds(_speedPUCD);
+        _speed /= _speedMult;
+        _pistolFR *= _pistolFRMult;
+        _shotgunFR *= _shotgunFRMult;
+        _speedBoostActive = false;
 
     }
 

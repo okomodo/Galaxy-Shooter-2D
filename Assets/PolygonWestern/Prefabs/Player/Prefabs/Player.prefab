@@ -1160,7 +1160,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247893814488529632}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -1174,7 +1174,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3247893814488529632}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _barrelEnd: {fileID: 1300254322270637764}
-  _shotgunRound: {fileID: 704758288815784049, guid: 76040204505bc0c448d1cd53469912ae, type: 3}
+  _shotgunRound: {fileID: 8079245241703115642, guid: 93f9fc35eed744342b29b9cf06075a8d, type: 3}
 --- !u!1 &3248114013547648180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,13 +1748,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e4475d97ef7224b87301a947ad56c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lives: 3
   _speed: 4
   _pistol: {fileID: 17062330656633214}
   _pistolDummy: {fileID: 1300254321712827940}
   _pistolFR: 0.5
-  _lives: 3
-  _shotgunFR: 0.7
   _shotgun: {fileID: 3247893814488529632}
+  _shotgunFR: 0.7
+  _speedPUCD: 10
+  _speedMult: 0
+  _pistolFRMult: 0
+  _shotgunFRMult: 0
 --- !u!54 &7799168282168643349
 Rigidbody:
   m_ObjectHideFlags: 0

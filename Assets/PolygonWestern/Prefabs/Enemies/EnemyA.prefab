@@ -128,8 +128,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5990318, y: 1.8, z: 0.351429}
-  m_Center: {x: 0.0071436167, y: 0.9, z: -0.011217117}
+  m_Size: {x: 1, y: 1.8, z: 0.5577221}
+  m_Center: {x: 0, y: 0.9, z: -0.0376482}
 --- !u!54 &2639139340886806273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -159,7 +159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _direction: {x: -1, y: 0, z: 0}
   _barrelEnd: {fileID: 2641077230742322822}
   _enemyPistolRound: {fileID: 704758288815784049, guid: cddb0b4507db24849b02e2b9aa9ef2f4, type: 3}
   _pistolFR: 1

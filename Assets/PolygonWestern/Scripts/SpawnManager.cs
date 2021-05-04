@@ -9,12 +9,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Transform _spawnPointR1R;
     [SerializeField] private Transform _spawnPointR1L;
 
-    [Header("Shotgun Powerup")]
-    [SerializeField] private bool _spawnShotgunPU = false;
-    [SerializeField] private GameObject _shotgunPU;
-    [SerializeField] private int _spawnRate = 10;
-    [SerializeField] private int _shotgunSpawnCD = 1;
-
     [Header("Enemy A Settings")]
     [SerializeField] private bool _spawnEnemyA = false;
     [SerializeField] private GameObject _enemyA;
@@ -22,30 +16,49 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private int _enemyASpawnAmount = 3;
     private int _amountEnemyAHasSpawned;
 
+    [Header("Powerup Settings")]
+    [SerializeField] private bool _spawnPowerups;
+    [SerializeField] private int _powerupSpawnCD;
+    [SerializeField] private int _powerupSpawnRate;
+
+    [Header("Shotgun Powerup")]
+    [SerializeField] private bool _spawnShotgunPU = false;
+    [SerializeField] private GameObject _shotgunPU;
+
+    [Header("Speed Powerup")]
+    [SerializeField] private bool _spawnSpeedPU = false;
+    [SerializeField] private GameObject _speedPU;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        if(_spawnShotgunPU == true)
+        if(_spawnPowerups == true)
         {
-            StartCoroutine(SpawnShotgunPU());
+            StartCoroutine(SpawnPowerups());
         }
 
         if(_spawnEnemyA == true)
         {
             StartCoroutine(SpawnEnemyA());
         }
+
     }
 
-    IEnumerator SpawnShotgunPU()
+    IEnumerator SpawnPowerups()
     {
-        while (_spawnShotgunPU == true)
+        while (_spawnPowerups == true)
         {
-            yield return new WaitForSeconds(_shotgunSpawnCD);
-            int SpawnRateNum = Random.Range(0, _spawnRate);
-            if(SpawnRateNum == 0)
+            yield return new WaitForSeconds(_powerupSpawnCD);
+            int SpawnRateNum = Random.Range(0, _powerupSpawnRate);
+            if (SpawnRateNum == 0 && _spawnShotgunPU == true)
             {
                 Instantiate(_shotgunPU, _spawnCenter);
+            }
+            else if(SpawnRateNum == 1 && _spawnSpeedPU == true)
+            {
+                Instantiate(_speedPU, _spawnCenter);
             }
         }
     }

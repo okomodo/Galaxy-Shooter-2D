@@ -29,6 +29,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private bool _spawnSpeedPU = false;
     [SerializeField] private GameObject _speedPU;
 
+    [Header("Shield Powerup")]
+    [SerializeField] private bool _spawnShieldPU = false;
+    [SerializeField] private GameObject _shieldPU;
 
 
     // Start is called before the first frame update
@@ -59,6 +62,10 @@ public class SpawnManager : MonoBehaviour
             else if(SpawnRateNum == 1 && _spawnSpeedPU == true)
             {
                 Instantiate(_speedPU, _spawnCenter);
+            }
+            else if(SpawnRateNum == 2 && _spawnShieldPU == true)
+            {
+                Instantiate(_shieldPU, _spawnCenter);
             }
         }
     }

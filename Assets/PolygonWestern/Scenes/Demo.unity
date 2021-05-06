@@ -76485,6 +76485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6693077173580165450, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7796894237432275081, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -76499,7 +76503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7796894237432275081, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -46.358
+      value: -46.5
       objectReference: {fileID: 0}
     - target: {fileID: 7796894237432275081, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -76533,27 +76537,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7799168282168643348, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
-      propertyPath: _speedMult
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799168282168643348, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
-      propertyPath: _speedPUCD
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799168282168643348, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
-      propertyPath: _pistolFRMult
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799168282168643348, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
-      propertyPath: _speedBoostCD
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7799168282168643348, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
-      propertyPath: _shotgunFRMult
-      value: 1.4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 380042506, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c5115cfb201b8814a8011566f1634c4b, type: 3}
 --- !u!4 &6424680844078260628
 Transform:
@@ -76617,17 +76602,19 @@ MonoBehaviour:
   _spawnCenter: {fileID: 1175251933}
   _spawnPointR1R: {fileID: 6424680845209394848}
   _spawnPointR1L: {fileID: 6424680844078260628}
-  _spawnEnemyA: 0
+  _spawnEnemyA: 1
   _enemyA: {fileID: 2639139340886806275, guid: cf7db192cb0a7824ead6480a2d913d57, type: 3}
   _enemyASpawnCD: 5
   _enemyASpawnAmount: 5
   _spawnPowerups: 1
   _powerupSpawnCD: 3
-  _powerupSpawnRate: 2
-  _spawnShotgunPU: 1
+  _powerupSpawnRate: 3
+  _spawnShotgunPU: 0
   _shotgunPU: {fileID: 2588789276252980214, guid: f71187bc855321a42a866497ee61c2d1, type: 3}
-  _spawnSpeedPU: 1
+  _spawnSpeedPU: 0
   _speedPU: {fileID: 3718152149458756043, guid: 25ece0632fc36c846917265b1249a914, type: 3}
+  _spawnShieldPU: 1
+  _shieldPU: {fileID: 5504895539793042985, guid: ae45d9d7d4ec7aa479cd0216c6c63f94, type: 3}
 --- !u!1 &6424680845151961359
 GameObject:
   m_ObjectHideFlags: 0

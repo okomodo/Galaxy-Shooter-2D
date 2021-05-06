@@ -37,6 +37,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float _shotgunFRMult = 1.4f;
     private bool _speedBoostActive = false;
 
+    [Header("Shield Powerup")]
+    [SerializeField] private GameObject _shields3;
+    [SerializeField] private GameObject _shields2;
+    [SerializeField] private GameObject _shields1;
+    [SerializeField] private GameObject _shieldExit;
+    private int _shieldLife = 0;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +64,12 @@ public class Player : MonoBehaviour
 
     }
 
-    
+    private void CanMoveandShoot()
+    {
+        _canMove = true;
+        _canShoot = true;
+    }
+
     private void Movement()
     {
         _direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
@@ -70,6 +84,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(-4, transform.position.y, transform.position.z);
         }
     }
+
     private void Shoot()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= _canFire && _canShoot == true)
@@ -106,6 +121,7 @@ public class Player : MonoBehaviour
     {
         if (other.tag == "EnemyPistolRound")
         {
+            other.GetComponent<BoxCollider>().enabled = false;
             LoseLife();
         }
 
@@ -129,16 +145,58 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (other.tag == "Shield Powerup")
+        {
+            Destroy(other.gameObject);
+            _shieldLife = 4;
+            LoseLife();
+        }
+
     }
 
     void LoseLife()
     {
-        _lives--;
-
-        if (_lives < 1)
+        if (_shieldLife > 0)
+        {
+            switch (_shieldLife)
+            {
+                case 4:
+                    _shields3.transform.gameObject.SetActive(true);
+                    _shieldLife--;
+                    break;
+                case 3:
+                    _shields3.transform.gameObject.SetActive(false);
+                    _shields2.transform.gameObject.SetActive(true);
+                    _shieldLife--;
+                    break;
+                case 2:
+                    _shields2.transform.gameObject.SetActive(false);
+                    _shields1.transform.gameObject.SetActive(true);
+                    _shieldLife--;
+                    break;
+                case 1:
+                    _shields1.transform.gameObject.SetActive(false);
+                    StartCoroutine(ShieldExit());
+                    _shieldLife--;
+                    break;
+            }
+            
+        }
+        else if (_lives > 0)
+        {
+            _lives--;
+        }
+        else
         {
             Debug.Log("GAME OVER!");
         }
+    }
+
+    IEnumerator ShieldExit()
+    {
+        _shieldExit.SetActive(true);
+        yield return new WaitForSeconds(1);
+        _shieldExit.SetActive(false);
     }
 
     private void DrawPistol()
@@ -148,12 +206,6 @@ public class Player : MonoBehaviour
 
     }
 
-    private void CanMoveandShoot()
-    {
-        _canMove = true;
-        _canShoot = true;
-    }
-   
     private void DrawShotgun()
     {
         DrawPistol();

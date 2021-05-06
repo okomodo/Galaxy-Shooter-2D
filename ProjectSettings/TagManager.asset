@@ -11,6 +11,7 @@ TagManager:
   - WinBox
   - Shotgun Powerup
   - Speed Powerup
+  - Shield Powerup
   layers:
   - Default
   - TransparentFX

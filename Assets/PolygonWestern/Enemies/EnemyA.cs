@@ -19,8 +19,9 @@ public class EnemyA : MonoBehaviour
     private int _currentlaps = 0;
     [SerializeField] private float _rowChangeWaitTime = 3f;
     private Animator _anim;
-
     private int _speedFloat;
+
+    UIManager _uIManager;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class EnemyA : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
         _speedFloat = Animator.StringToHash("Speed");
         _anim = GetComponent<Animator>();
+        _uIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
 
         if(transform.position.x == -9)
         {
@@ -68,6 +70,7 @@ public class EnemyA : MonoBehaviour
     {
         if (other.tag == "PistolRound")
         {
+            _uIManager.AddToScore(100);
             Destroy(gameObject);
         }
 

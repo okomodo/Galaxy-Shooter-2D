@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] private int _lives = 3;
+    [SerializeField] private GameObject _heart1, _heart2, _heart3;
+    [SerializeField] private GameObject _gameOverCanvas;
     private Animator _anim;
     private int _speedFloat;
 
@@ -16,8 +18,7 @@ public class Player : MonoBehaviour
     private bool _canMove = false;
 
     [Header("Revolver")]
-    [SerializeField] GameObject _pistol;
-    [SerializeField] GameObject _pistolDummy;
+    [SerializeField] GameObject _pistol, _pistolDummy;
     [SerializeField] private float _pistolFR = 0.5f;
     private Pistol _pistolScript;
     private float _canFire = 0;
@@ -38,15 +39,11 @@ public class Player : MonoBehaviour
     private bool _speedBoostActive = false;
 
     [Header("Shield Powerup")]
-    [SerializeField] private GameObject _shields3;
-    [SerializeField] private GameObject _shields2;
-    [SerializeField] private GameObject _shields1;
-    [SerializeField] private GameObject _shieldExit;
-    private int _shieldLife = 0;
+    [SerializeField] private int _shieldLife = 0;
+    [SerializeField] private GameObject _shields3, _shields2, _shields1, _shieldExit;
 
 
 
-    // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, -46.5f);
@@ -55,6 +52,8 @@ public class Player : MonoBehaviour
         _speedFloat = Animator.StringToHash("Speed");
         _pistolScript = _pistol.GetComponent<Pistol>();
         _shotgunScript = _shotgun.GetComponent<Shotgun>();
+
+        StartCoroutine(StartLives());
     }
 
     private void Update()
@@ -184,11 +183,28 @@ public class Player : MonoBehaviour
         }
         else if (_lives > 0)
         {
-            _lives--;
+            switch (_lives)
+            {
+                case 3:
+                    _heart3.gameObject.SetActive(false);
+                    _lives--;
+                    break;
+                case 2:
+                    _heart2.gameObject.SetActive(false);
+                    _lives--;
+                    break;
+                case 1:
+                    _heart1.gameObject.SetActive(false);
+                    _lives--;
+                    Time.timeScale = 0;
+                    _gameOverCanvas.SetActive(true);
+                    break;
+            }
         }
         else
         {
             Debug.Log("GAME OVER!");
+
         }
     }
 
@@ -224,6 +240,18 @@ public class Player : MonoBehaviour
         _pistolFR *= _pistolFRMult;
         _shotgunFR *= _shotgunFRMult;
         _speedBoostActive = false;
+
+    }
+
+    IEnumerator StartLives()
+    {
+
+        yield return new WaitForSeconds(3f);
+        _heart1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        _heart2.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        _heart3.gameObject.SetActive(true);
 
     }
 

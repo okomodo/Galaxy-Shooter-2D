@@ -12,6 +12,7 @@ TagManager:
   - Shotgun Powerup
   - Speed Powerup
   - Shield Powerup
+  - UIManager
   layers:
   - Default
   - TransparentFX

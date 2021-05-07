@@ -19,6 +19,10 @@ public class EnemyARound : MonoBehaviour
     private void Update()
     {
         transform.LookAt(_playerPos);
+        if (transform.position == _playerPos)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

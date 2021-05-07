@@ -25796,7 +25796,6 @@ GameObject:
   - component: {fileID: 8634621027977428886}
   - component: {fileID: 4588345688388960520}
   - component: {fileID: 4192629386604749866}
-  - component: {fileID: 380042506}
   m_Layer: 0
   m_Name: ShieldAura 2
   m_TagString: Untagged
@@ -30672,18 +30671,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &380042506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4641853500038265227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4851165388551308075
 GameObject:
   m_ObjectHideFlags: 0
@@ -60634,6 +60621,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lives: 3
+  _heart1: {fileID: 0}
+  _heart2: {fileID: 0}
+  _heart3: {fileID: 0}
+  _gameOverCanvas: {fileID: 0}
   _speed: 4
   _pistol: {fileID: 17062330656633214}
   _pistolDummy: {fileID: 1300254321712827940}
@@ -60648,7 +60639,6 @@ MonoBehaviour:
   _shields2: {fileID: 4641853500038265227}
   _shields1: {fileID: 8666794104313194187}
   _shieldExit: {fileID: 1420866717}
-  _shieldLife: 0
 --- !u!54 &7799168282168643349
 Rigidbody:
   m_ObjectHideFlags: 0

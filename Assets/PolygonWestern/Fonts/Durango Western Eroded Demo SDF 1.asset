@@ -2273,13 +2273,13 @@ Material:
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
-    - _OutlineSoftness: 0.5
+    - _OutlineSoftness: 1
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
     - _OutlineWidth: 0.1
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioA: 0.64724916
     - _ScaleRatioB: 0.6770833
     - _ScaleRatioC: 0.33854166
     - _ScaleX: 1
@@ -2305,7 +2305,7 @@ Material:
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FaceColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
     - _GlowColor: {r: 0.9150943, g: 0.75734556, b: 0.056114297, a: 0.2}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
     - _OutlineColor: {r: 0.21698111, g: 0.14817946, b: 0.09313812, a: 1}

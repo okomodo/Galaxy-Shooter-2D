@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
     public void AddToScore(int points)
     {
         _score += points;
-        _scoreTMP.text = ("Score " + _score);
+        _scoreTMP.text = ("$" + _score);
         _scoreAnim.AddScoreAnim();
     }
 }

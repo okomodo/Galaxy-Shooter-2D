@@ -2,19 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class UIFade : MonoBehaviour
 {
+    private bool _animStarted = false;
 
     private void Start()
     {
-        Image image = GetComponent<Image>();
-        Tweener(image);
+        AddScoreAnim();
     }
 
-    static void Tweener(Image Tween)
+    public void AddScoreAnim()
     {
-        DOTween.ToAlpha(() => Tween.color, x => Tween.color = x, 15, 10);
+        StartCoroutine(StartAnim());
+    }
+
+    IEnumerator StartAnim()
+    {
+        if (_animStarted == false)
+        {
+            _animStarted = true;
+            transform.DOPunchPosition(new Vector3(0, -50, 0), 1, 10, 0.5f, true);
+            yield return new WaitForSeconds(1);
+            _animStarted = false;
+        }
     }
 }

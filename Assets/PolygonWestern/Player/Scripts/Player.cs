@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
+
         transform.position = new Vector3(0, 0, -46.5f);
         _rigid = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();

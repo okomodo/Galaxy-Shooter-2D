@@ -8,8 +8,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int _lives = 3;
     [SerializeField] private GameObject _heart1, _heart2, _heart3;
     [SerializeField] private GameObject _gameOverCanvas;
+    [SerializeField] private ParticleSystem _bloodFX;
     private Animator _anim;
     private int _speedFloat;
+    private AudioSource _goreSFX;
 
     [Header("Movement")]
     [SerializeField] private float _speed = 10;
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
         _speedFloat = Animator.StringToHash("Speed");
         _pistolScript = _pistol.GetComponent<Pistol>();
         _shotgunScript = _shotgun.GetComponent<Shotgun>();
+        _goreSFX = GetComponent<AudioSource>();
 
         StartCoroutine(StartLives());
     }
@@ -185,6 +188,8 @@ public class Player : MonoBehaviour
         }
         else if (_lives > 0)
         {
+            _bloodFX.Play(true);
+            _goreSFX.Play();
             switch (_lives)
             {
                 case 3:
@@ -198,6 +203,8 @@ public class Player : MonoBehaviour
                 case 1:
                     _heart1.gameObject.SetActive(false);
                     _lives--;
+                    _canMove = false;
+                    _anim.SetTrigger("Dead");
                     Time.timeScale = 0;
                     _gameOverCanvas.SetActive(true);
                     break;

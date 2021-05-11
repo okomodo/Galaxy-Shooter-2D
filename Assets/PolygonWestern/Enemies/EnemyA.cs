@@ -20,8 +20,10 @@ public class EnemyA : MonoBehaviour
     [SerializeField] private float _rowChangeWaitTime = 3f;
     private Animator _anim;
     private int _speedFloat;
-
+    private bool _dead = false;
     UIManager _uIManager;
+
+    [SerializeField] private GameObject _deathVFX;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +46,7 @@ public class EnemyA : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time >= _pistolFRTime && _canFire == true)
+        if (Time.time >= _pistolFRTime && _canFire == true && _dead == false)
         {
             _pistolFRTime = Time.time + _pistolFR;
             Instantiate(_enemyPistolRound, _barrelEnd.position, Quaternion.identity);
@@ -71,7 +73,7 @@ public class EnemyA : MonoBehaviour
         if (other.tag == "PistolRound")
         {
             _uIManager.AddToScore(100);
-            Destroy(gameObject);
+            StartCoroutine(EnemyDeath());
         }
 
         if (other.tag == "WinBox")
@@ -114,6 +116,16 @@ public class EnemyA : MonoBehaviour
         _canMove = false;
         yield return new WaitForSeconds(_rowChangeWaitTime);
         _canMove = true;
+    }
+
+    IEnumerator EnemyDeath()
+    {
+        _anim.SetBool("Dead", true);
+        _canMove = false;
+        _dead = true;
+        _deathVFX.SetActive(true);
+        yield return new WaitForSeconds(4);
+        Destroy(gameObject);
     }
 
 }

@@ -8,9 +8,11 @@ public class MainMenuControls : MonoBehaviour
 {
 
     private bool _animStarted = false;
+    private AudioSource _ricochetAudio;
 
     public void AddScoreAnim()
     {
+        _ricochetAudio = GetComponent<AudioSource>();
         StartCoroutine(StartAnim());
     }
 
@@ -20,6 +22,8 @@ public class MainMenuControls : MonoBehaviour
         {
             _animStarted = true;
             transform.DOPunchPosition(new Vector3(0, -50, 0), 1, 10, 0.5f, true);
+            _ricochetAudio.pitch = (Random.Range(0.75f, 1.25f));
+            _ricochetAudio.Play();
             yield return new WaitForSeconds(1);
             _animStarted = false;
         }

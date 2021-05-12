@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _lives = 3;
     [SerializeField] private GameObject _heart1, _heart2, _heart3;
     [SerializeField] private GameObject _gameOverCanvas;
-    [SerializeField] private ParticleSystem _bloodFX;
+    [SerializeField] private ParticleSystem _bloodFX, _bloodDrip1, _bloodDrip2;
     private Animator _anim;
     private int _speedFloat;
     private AudioSource _goreSFX;
@@ -194,10 +194,12 @@ public class Player : MonoBehaviour
             {
                 case 3:
                     _heart3.gameObject.SetActive(false);
+                    _bloodDrip1.Play(true);
                     _lives--;
                     break;
                 case 2:
                     _heart2.gameObject.SetActive(false);
+                    _bloodDrip2.Play(true);
                     _lives--;
                     break;
                 case 1:

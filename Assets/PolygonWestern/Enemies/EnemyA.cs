@@ -7,9 +7,11 @@ public class EnemyA : MonoBehaviour
     private Rigidbody _rigid;
     [SerializeField] private int _speed = 5;
     private Vector3 _direction;
+    private BoxCollider _collider;
 
     [SerializeField] private Transform _barrelEnd;
     [SerializeField] private GameObject _enemyPistolRound;
+    [SerializeField] private ParticleSystem _muzzleFlash;
 
     [SerializeField] private float _pistolFR = 1;
     private float _pistolFRTime = 0;
@@ -33,6 +35,7 @@ public class EnemyA : MonoBehaviour
         _speedFloat = Animator.StringToHash("Speed");
         _anim = GetComponent<Animator>();
         _uIManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _collider = GetComponent<BoxCollider>();
 
         if(transform.position.x == -9)
         {
@@ -49,6 +52,7 @@ public class EnemyA : MonoBehaviour
         if (Time.time >= _pistolFRTime && _canFire == true && _dead == false)
         {
             _pistolFRTime = Time.time + _pistolFR;
+            _muzzleFlash.Play();
             Instantiate(_enemyPistolRound, _barrelEnd.position, Quaternion.identity);
         }
 
@@ -72,6 +76,7 @@ public class EnemyA : MonoBehaviour
     {
         if (other.tag == "PistolRound")
         {
+            Destroy(_collider);
             _uIManager.AddToScore(100);
             StartCoroutine(EnemyDeath());
         }

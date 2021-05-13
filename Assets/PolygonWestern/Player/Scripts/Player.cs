@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] private ParticleSystem _bloodFX, _bloodDrip1, _bloodDrip2;
     private Animator _anim;
     private int _speedFloat;
-    private AudioSource _goreSFX;
 
     [Header("Movement")]
     [SerializeField] private float _speed = 10;
@@ -44,6 +43,12 @@ public class Player : MonoBehaviour
     [SerializeField] private int _shieldLife = 0;
     [SerializeField] private GameObject _shields3, _shields2, _shields1, _shieldExit;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource _goreSFX;
+    [SerializeField] private AudioSource _bGMusic, _gOMusic;
+    [SerializeField] private AudioSource _walkSFX;
+    private bool _isWalking = false;
+
 
 
     void Start()
@@ -56,7 +61,6 @@ public class Player : MonoBehaviour
         _speedFloat = Animator.StringToHash("Speed");
         _pistolScript = _pistol.GetComponent<Pistol>();
         _shotgunScript = _shotgun.GetComponent<Shotgun>();
-        _goreSFX = GetComponent<AudioSource>();
 
         StartCoroutine(StartLives());
     }
@@ -65,7 +69,6 @@ public class Player : MonoBehaviour
     {
         Movement();
         Shoot();
-
     }
 
     private void CanMoveandShoot()
@@ -87,6 +90,20 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(-4, transform.position.y, transform.position.z);
         }
+
+        if (_canMove == true)
+        {
+            if (_direction.x > 0.1f || _direction.x < -0.1f)
+            {
+                IsWalking();
+            }
+            else
+            {
+                _walkSFX.Stop();
+                _isWalking = false;
+            }
+        }
+
     }
 
     private void Shoot()
@@ -208,6 +225,8 @@ public class Player : MonoBehaviour
                     _canMove = false;
                     _anim.SetTrigger("Dead");
                     Time.timeScale = 0;
+                    _bGMusic.Stop();
+                    _gOMusic.Play();
                     _gameOverCanvas.SetActive(true);
                     break;
             }
@@ -266,5 +285,14 @@ public class Player : MonoBehaviour
 
     }
 
+    private void IsWalking()
+    {
+        if (_isWalking == false)
+        {
+            _walkSFX.pitch = (Random.Range(0.85f, 1.15f));
+            _walkSFX.Play();
+            _isWalking = true;
+        }
 
+    }
 }

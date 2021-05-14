@@ -44,9 +44,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _shields3, _shields2, _shields1, _shieldExit;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource _goreSFX;
-    [SerializeField] private AudioSource _bGMusic, _gOMusic;
     [SerializeField] private AudioSource _walkSFX;
+    [SerializeField] private AudioSource _goreSFX, _shotgunSFX, _speedSFX, _shieldSFX;
+    [SerializeField] private AudioSource _bGMusic, _gOMusic;
     private bool _isWalking = false;
 
 
@@ -149,7 +149,8 @@ public class Player : MonoBehaviour
         if (other.tag == "Shotgun Powerup")
         {
             Destroy(other.gameObject);
-            _shotgunAmmo = 6;
+            _shotgunAmmo = 4;
+            _shotgunSFX.Play();
             if (_shotgunActive == false)
             {
                 DrawShotgun();
@@ -160,6 +161,7 @@ public class Player : MonoBehaviour
         if (other.tag == "Speed Powerup")
         {
             Destroy(other.gameObject);
+            _speedSFX.Play();
             if (_speedBoostActive == false)
             {
                 StartCoroutine(SpeedBoost());
@@ -170,6 +172,7 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             _shieldLife = 4;
+            _shieldSFX.Play();
             LoseLife();
         }
 
@@ -183,6 +186,8 @@ public class Player : MonoBehaviour
             {
                 case 4:
                     _shields3.transform.gameObject.SetActive(true);
+                    _shields2.transform.gameObject.SetActive(false);
+                    _shields1.transform.gameObject.SetActive(false);
                     _shieldLife--;
                     break;
                 case 3:
@@ -295,4 +300,6 @@ public class Player : MonoBehaviour
         }
 
     }
+
+
 }

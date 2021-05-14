@@ -17,13 +17,13 @@ public class EnemyA : MonoBehaviour
     private float _pistolFRTime = 0;
     private bool _canFire = false;
     private bool _canMove = true;
-    private bool _canWin = false;
     private int _currentlaps = 0;
     [SerializeField] private float _rowChangeWaitTime = 3f;
     private Animator _anim;
     private int _speedFloat;
     private bool _dead = false;
     UIManager _uIManager;
+    private bool _stopchangerows = false;
 
     [SerializeField] private GameObject _deathVFX;
 
@@ -56,16 +56,10 @@ public class EnemyA : MonoBehaviour
             Instantiate(_enemyPistolRound, _barrelEnd.position, Quaternion.identity);
         }
 
-        if(_currentlaps > 2)
+        if(_currentlaps > 2 && _stopchangerows == false)
         {
             _currentlaps = 0;
             StartCoroutine(ChangeRow());
-
-            if( _canWin == true)
-            {
-                Debug.Log("BANG! You Lose");
-                Destroy(gameObject);
-            }
         }
 
         _anim.SetFloat(_speedFloat, _direction.x);
@@ -83,7 +77,7 @@ public class EnemyA : MonoBehaviour
 
         if (other.tag == "WinBox")
         {
-            _canWin = true;
+            _stopchangerows = true;
         }
     }
     // Update is called once per frame

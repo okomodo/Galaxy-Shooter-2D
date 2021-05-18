@@ -11,12 +11,14 @@ public class Player : MonoBehaviour
     [SerializeField] private ParticleSystem _bloodFX, _bloodDrip1, _bloodDrip2;
     private Animator _anim;
     private int _speedFloat;
+    private bool _invincible = false;
 
     [Header("Movement")]
     [SerializeField] private float _speed = 10;
     private Rigidbody _rigid;
     private Vector3 _direction;
     private bool _canMove = false;
+    private bool _canRoll = false;
 
     [Header("Revolver")]
     [SerializeField] GameObject _pistol, _pistolDummy;
@@ -69,12 +71,25 @@ public class Player : MonoBehaviour
     {
         Movement();
         Shoot();
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && _canRoll == true)
+        {
+            if(_direction.x > 0.1f)
+            {
+                StartCoroutine(Roll(0));
+            }
+            else if(_direction.x < -0.1f)
+            {
+                StartCoroutine(Roll(1));
+            }
+        }
     }
 
     private void CanMoveandShoot()
     {
         _canMove = true;
         _canShoot = true;
+        _canRoll = true;
     }
 
     private void Movement()
@@ -180,66 +195,69 @@ public class Player : MonoBehaviour
 
     void LoseLife()
     {
-        if (_shieldLife > 0)
+        if (_invincible == false)
         {
-            switch (_shieldLife)
+            if (_shieldLife > 0)
             {
-                case 4:
-                    _shields3.transform.gameObject.SetActive(true);
-                    _shields2.transform.gameObject.SetActive(false);
-                    _shields1.transform.gameObject.SetActive(false);
-                    _shieldLife--;
-                    break;
-                case 3:
-                    _shields3.transform.gameObject.SetActive(false);
-                    _shields2.transform.gameObject.SetActive(true);
-                    _shieldLife--;
-                    break;
-                case 2:
-                    _shields2.transform.gameObject.SetActive(false);
-                    _shields1.transform.gameObject.SetActive(true);
-                    _shieldLife--;
-                    break;
-                case 1:
-                    _shields1.transform.gameObject.SetActive(false);
-                    StartCoroutine(ShieldExit());
-                    _shieldLife--;
-                    break;
-            }
-            
-        }
-        else if (_lives > 0)
-        {
-            _bloodFX.Play(true);
-            _goreSFX.Play();
-            switch (_lives)
-            {
-                case 3:
-                    _heart3.gameObject.SetActive(false);
-                    _bloodDrip1.Play(true);
-                    _lives--;
-                    break;
-                case 2:
-                    _heart2.gameObject.SetActive(false);
-                    _bloodDrip2.Play(true);
-                    _lives--;
-                    break;
-                case 1:
-                    _heart1.gameObject.SetActive(false);
-                    _lives--;
-                    _canMove = false;
-                    _anim.SetTrigger("Dead");
-                    Time.timeScale = 0;
-                    _bGMusic.Stop();
-                    _gOMusic.Play();
-                    _gameOverCanvas.SetActive(true);
-                    break;
-            }
-        }
-        else
-        {
-            Debug.Log("GAME OVER!");
+                switch (_shieldLife)
+                {
+                    case 4:
+                        _shields3.transform.gameObject.SetActive(true);
+                        _shields2.transform.gameObject.SetActive(false);
+                        _shields1.transform.gameObject.SetActive(false);
+                        _shieldLife--;
+                        break;
+                    case 3:
+                        _shields3.transform.gameObject.SetActive(false);
+                        _shields2.transform.gameObject.SetActive(true);
+                        _shieldLife--;
+                        break;
+                    case 2:
+                        _shields2.transform.gameObject.SetActive(false);
+                        _shields1.transform.gameObject.SetActive(true);
+                        _shieldLife--;
+                        break;
+                    case 1:
+                        _shields1.transform.gameObject.SetActive(false);
+                        StartCoroutine(ShieldExit());
+                        _shieldLife--;
+                        break;
+                }
 
+            }
+            else if (_lives > 0)
+            {
+                _bloodFX.Play(true);
+                _goreSFX.Play();
+                switch (_lives)
+                {
+                    case 3:
+                        _heart3.gameObject.SetActive(false);
+                        _bloodDrip1.Play(true);
+                        _lives--;
+                        break;
+                    case 2:
+                        _heart2.gameObject.SetActive(false);
+                        _bloodDrip2.Play(true);
+                        _lives--;
+                        break;
+                    case 1:
+                        _heart1.gameObject.SetActive(false);
+                        _lives--;
+                        _canMove = false;
+                        _anim.SetTrigger("Dead");
+                        Time.timeScale = 0;
+                        _bGMusic.Stop();
+                        _gOMusic.Play();
+                        _gameOverCanvas.SetActive(true);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log("GAME OVER!");
+
+            }
         }
     }
 
@@ -301,5 +319,30 @@ public class Player : MonoBehaviour
 
     }
 
+    IEnumerator Roll(int direction)
+    {
+        _anim.SetBool("Roll", true);
+        _canMove = false;
+        _canShoot = false;
+        _invincible = true;
+        _canRoll = false;
+        switch (direction)
+        {
+            case 0:
+                transform.rotation = Quaternion.Euler(0, 90, 0);
+                break;
+            case 1:
+                transform.rotation = Quaternion.Euler(0, -90, 0);
+                break;
+        }
+        yield return new WaitForSeconds(0.8f);
+        _anim.SetBool("Roll", false);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.position = new Vector3(transform.position.x, 0, -46.5f);
+        _canMove = true;
+        _canShoot = true;
+        _invincible = false;
+        _canRoll = true;
+    }
 
 }

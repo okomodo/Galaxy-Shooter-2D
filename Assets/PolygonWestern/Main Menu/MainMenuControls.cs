@@ -54,7 +54,7 @@ public class MainMenuControls : MonoBehaviour
     IEnumerator ExitGameRoutine()
     {
         yield return new WaitForSeconds(1);
-        Debug.Log("Quit Game");
+        Application.Quit();
 
     }
 }

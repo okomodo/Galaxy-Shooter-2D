@@ -224,6 +224,16 @@ public class Player : MonoBehaviour
             _uIManager.Ammo(_pistolAmmo);
             _outOfAmmo = false;
         }
+
+        if (other.tag == "Health Powerup")
+        {
+            Destroy(other.gameObject);
+            if(_lives < 3)
+            {
+                _lives++;
+                LifeCounter(true);
+            }
+        }
     }
 
     void LoseLife()
@@ -262,34 +272,57 @@ public class Player : MonoBehaviour
             {
                 _bloodFX.Play(true);
                 _goreSFX.Play();
-                switch (_lives)
-                {
-                    case 3:
-                        _heart3.gameObject.SetActive(false);
-                        _bloodDrip1.Play(true);
-                        _lives--;
-                        break;
-                    case 2:
-                        _heart2.gameObject.SetActive(false);
-                        _bloodDrip2.Play(true);
-                        _lives--;
-                        break;
-                    case 1:
-                        _heart1.gameObject.SetActive(false);
-                        _lives--;
-                        _canMove = false;
-                        _anim.SetTrigger("Dead");
-                        Time.timeScale = 0;
-                        _bGMusic.Stop();
-                        _gOMusic.Play();
-                        _gameOverCanvas.SetActive(true);
-                        break;
-                }
+                LifeCounter(false);
             }
             else
             {
                 Debug.Log("GAME OVER!");
 
+            }
+        }
+    }
+
+    void LifeCounter(bool Heal)
+    {
+        if (Heal == false)
+        {
+            switch (_lives)
+            {
+                case 3:
+                    _heart3.gameObject.SetActive(false);
+                    _bloodDrip1.Play(true);
+                    _lives--;
+                    break;
+                case 2:
+                    _heart2.gameObject.SetActive(false);
+                    _bloodDrip2.Play(true);
+                    _lives--;
+                    break;
+                case 1:
+                    _heart1.gameObject.SetActive(false);
+                    _lives--;
+                    _canMove = false;
+                    _anim.SetTrigger("Dead");
+                    Time.timeScale = 0;
+                    _bGMusic.Stop();
+                    _gOMusic.Play();
+                    _gameOverCanvas.SetActive(true);
+                    break;
+            }
+        }
+
+        if (Heal == true)
+        {
+            switch (_lives)
+            {
+                case 3:
+                    _heart3.gameObject.SetActive(true);
+                    _bloodDrip1.Pause(true);
+                    break;
+                case 2:
+                    _heart2.gameObject.SetActive(true);
+                    _bloodDrip2.Pause(true);
+                    break;
             }
         }
     }

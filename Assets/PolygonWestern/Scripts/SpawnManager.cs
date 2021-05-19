@@ -37,6 +37,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private bool _spawnAmmoPU = false;
     [SerializeField] private GameObject _ammoPU;
 
+    [Header("Health Powerup")]
+    [SerializeField] private bool _spawnHealthPU = false;
+    [SerializeField] private GameObject _healthPU;
+
 
     // Start is called before the first frame update
     void Start()
@@ -74,6 +78,10 @@ public class SpawnManager : MonoBehaviour
             else if(SpawnRateNum == 3 && _spawnAmmoPU == true)
             {
                 Instantiate(_ammoPU, _spawnCenter);
+            }
+            else if (SpawnRateNum == 4 && _spawnHealthPU == true)
+            {
+                Instantiate(_healthPU, _spawnCenter);
             }
         }
     }

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _heart1, _heart2, _heart3;
     [SerializeField] private GameObject _gameOverCanvas;
     [SerializeField] private ParticleSystem _bloodFX, _bloodDrip1, _bloodDrip2;
+    [SerializeField] private UIManager _uIManager;
     private Animator _anim;
     private int _speedFloat;
     private bool _invincible = false;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
     private Pistol _pistolScript;
     private float _canFire = 0;
     private bool _canShoot = false;
+    private int _pistolAmmo = 12;
+    private bool _outOfAmmo = false;
 
     [Header ("Shotgun Powerup")]
     [SerializeField] private GameObject _shotgun;
@@ -72,17 +75,6 @@ public class Player : MonoBehaviour
         Movement();
         Shoot();
 
-        if(Input.GetKeyDown(KeyCode.LeftShift) && _canRoll == true)
-        {
-            if(_direction.x > 0.1f)
-            {
-                StartCoroutine(Roll(0));
-            }
-            else if(_direction.x < -0.1f)
-            {
-                StartCoroutine(Roll(1));
-            }
-        }
     }
 
     private void CanMoveandShoot()
@@ -104,6 +96,18 @@ public class Player : MonoBehaviour
         else if (transform.position.x < -4)
         {
             transform.position = new Vector3(-4, transform.position.y, transform.position.z);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _canRoll == true)
+        {
+            if (_direction.x > 0.1f)
+            {
+                StartCoroutine(Roll(0));
+            }
+            else if (_direction.x < -0.1f)
+            {
+                StartCoroutine(Roll(1));
+            }
         }
 
         if (_canMove == true)
@@ -129,18 +133,26 @@ public class Player : MonoBehaviour
             {
                 _canFire = Time.time + _shotgunFR;
                 _shotgunScript.Fire();
+                _shotgunAmmo--;
 
-                if (_shotgunAmmo == 1)
+                if (_shotgunAmmo == 0)
                 {
                     DrawShotgun();
                 }
-
-                _shotgunAmmo--;
             }
-            else
+            else if (_outOfAmmo == false)
             {
                 _canFire = Time.time + _pistolFR;
                 _pistolScript.Fire();
+                _pistolAmmo--;
+                _uIManager.Ammo(_pistolAmmo);
+
+                if (_pistolAmmo == 0)
+                {
+                    Debug.Log("Out of Ammo!");
+                    _outOfAmmo = true;
+                }
+
             }
         }
     }
@@ -191,6 +203,12 @@ public class Player : MonoBehaviour
             LoseLife();
         }
 
+        if (other.tag == "Ammo Powerup")
+        {
+            Destroy(other.gameObject);
+            _outOfAmmo = false;
+            _pistolAmmo = 12;
+        }
     }
 
     void LoseLife()

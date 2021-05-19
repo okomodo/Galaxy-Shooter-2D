@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _gameOverCanvas;
     [SerializeField] private ParticleSystem _bloodFX, _bloodDrip1, _bloodDrip2;
     [SerializeField] private UIManager _uIManager;
+    [SerializeField] private SpawnManager _spawnManager;
     private Animator _anim;
     private int _speedFloat;
     private bool _invincible = false;
@@ -151,6 +152,7 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("Out of Ammo!");
                     _outOfAmmo = true;
+                    _spawnManager.SpawnAmmo();
                 }
 
             }
@@ -206,8 +208,21 @@ public class Player : MonoBehaviour
         if (other.tag == "Ammo Powerup")
         {
             Destroy(other.gameObject);
-            _outOfAmmo = false;
             _pistolAmmo = 12;
+            _uIManager.Ammo(_pistolAmmo);
+            _outOfAmmo = false;
+        }
+
+        if (other.tag == "Ammo Drop")
+        {
+            Destroy(other.gameObject);
+            _pistolAmmo += 6;
+            if(_pistolAmmo > 12)
+            {
+                _pistolAmmo = 12;
+            }
+            _uIManager.Ammo(_pistolAmmo);
+            _outOfAmmo = false;
         }
     }
 

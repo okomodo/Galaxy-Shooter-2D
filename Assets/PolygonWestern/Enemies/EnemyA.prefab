@@ -96,6 +96,7 @@ Transform:
   - {fileID: 2645526883135191661}
   - {fileID: 2645738915368681883}
   - {fileID: 2220664772762308987}
+  - {fileID: 1258893533519986206}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -129,7 +130,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.8, z: 1.5}
+  m_Size: {x: 0.6, y: 1.8, z: 1.5}
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &2639139340886806273
 Rigidbody:
@@ -163,6 +164,7 @@ MonoBehaviour:
   _barrelEnd: {fileID: 2641077230742322822}
   _enemyPistolRound: {fileID: 704758288815784049, guid: cddb0b4507db24849b02e2b9aa9ef2f4, type: 3}
   _muzzleFlash: {fileID: 1404214677194397267}
+  _ammoDrop: {fileID: 1258893533519986204}
   _pistolFR: 1.5
   _rowChangeWaitTime: 3
   _deathVFX: {fileID: 6394930843654680328}
@@ -2233,14 +2235,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1af3095c408ed84c8e5fb46dde0af6d, type: 3}
---- !u!198 &1404214677194397267 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1404214677468968171, guid: a1af3095c408ed84c8e5fb46dde0af6d, type: 3}
-  m_PrefabInstance: {fileID: 811770552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1273910891024235245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1273910890225375317, guid: a1af3095c408ed84c8e5fb46dde0af6d, type: 3}
+  m_PrefabInstance: {fileID: 811770552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1404214677194397267 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1404214677468968171, guid: a1af3095c408ed84c8e5fb46dde0af6d, type: 3}
   m_PrefabInstance: {fileID: 811770552}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &851861382
@@ -2345,4 +2347,75 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2220664772523642621, guid: f0fa8927dfb32274c9a03767fbfdd31a, type: 3}
   m_PrefabInstance: {fileID: 851861382}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3257445284631166319
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2645567088918964647}
+    m_Modifications:
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826739, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_Name
+      value: Ammo Drop Powerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345052000472826739, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+--- !u!1 &1258893533519986204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4345052000472826739, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+  m_PrefabInstance: {fileID: 3257445284631166319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1258893533519986206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4345052000472826737, guid: 75a5ede50127b7644ab8f9f9c397d70e, type: 3}
+  m_PrefabInstance: {fileID: 3257445284631166319}
   m_PrefabAsset: {fileID: 0}

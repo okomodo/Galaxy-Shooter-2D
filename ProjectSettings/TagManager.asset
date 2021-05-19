@@ -13,6 +13,8 @@ TagManager:
   - Speed Powerup
   - Shield Powerup
   - UIManager
+  - Ammo Powerup
+  - Ammo Drop
   layers:
   - Default
   - TransparentFX

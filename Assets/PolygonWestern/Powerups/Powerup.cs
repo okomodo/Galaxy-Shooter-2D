@@ -5,7 +5,7 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
     
-    [SerializeField] private int _speed = 2;
+    [SerializeField] private int _speed = 5;
 
     private void Start()
     {

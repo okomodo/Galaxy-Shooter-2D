@@ -12,6 +12,7 @@ public class EnemyA : MonoBehaviour
     [SerializeField] private Transform _barrelEnd;
     [SerializeField] private GameObject _enemyPistolRound;
     [SerializeField] private ParticleSystem _muzzleFlash;
+    [SerializeField] private GameObject _ammoDrop;
 
     [SerializeField] private float _pistolFR = 1;
     private float _pistolFRTime = 0;
@@ -123,6 +124,12 @@ public class EnemyA : MonoBehaviour
         _canMove = false;
         _dead = true;
         _deathVFX.SetActive(true);
+        int DropChance = Random.Range(0, 2);
+        if(DropChance == 1)
+        {
+            _ammoDrop.SetActive(true);
+            _ammoDrop.transform.parent = null;
+        }
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
     }
